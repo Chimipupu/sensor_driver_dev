@@ -24,8 +24,8 @@
 #endif
 
 // #define BOARD_ESP32
-// #define BOARD_ESP32_S3
-#define BOARD_RP2040
+#define BOARD_ESP32_S3
+// #define BOARD_RP2040
 
 // I2C
 #define I2C_FREQ_100KHZ 100000
@@ -39,8 +39,8 @@
 
 // ESP32 S3
 #ifdef BOARD_ESP32_S3
-#define I2C_SCL 1
-#define I2C_SDA 2
+#define I2C_SCL 39
+#define I2C_SDA 38
 #endif /* BOARD_ESP32_S3 */
 
 // Maker Pi RP2040
@@ -49,12 +49,9 @@
 #define I2C_SDA 16
 #endif /* BOARD_RP2040 */
 
-// #define SOFT_WIRE
-#ifndef SOFT_WIRE
 #include <Wire.h>
 #define HARD_WIRE
 #define WIRE_I2C   Wire
-#endif /* SOFT_WIRE */
 
 bool drv_sht30_data_read(float &ctemp, float &ftemp, float &humidity);
 void drv_sht30_init(void);

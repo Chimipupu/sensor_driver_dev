@@ -11,12 +11,6 @@
 
 #include "drv_sht30.hpp"
 
-#ifdef SOFT_WIRE
-#include <SoftWire.h>
-SoftWire softWire=SoftWire(I2C_SDA, I2C_SCL);
-#define WIRE_I2C   softWire
-#endif /* SOFT_WIRE */
-
 void drv_sht30_init(void)
 {
 #ifdef BOARD_RP2040
@@ -26,6 +20,7 @@ void drv_sht30_init(void)
 
 #ifdef BOARD_ESP32_S3
     // WIRE_I2C.begin(I2C_SCL, I2C_SDA, I2C_FREQ_100KHZ);
+    WIRE_I2C.begin();
 #else
     WIRE_I2C.begin();
 #endif
