@@ -11,6 +11,26 @@
 
 #include "drv_sht30.hpp"
 
+#ifdef SOFT_WIRE
+#include <SoftWire.h>
+SoftWire softWire=SoftWire(I2C_SDA, I2C_SCL);
+#define WIRE_I2C   softWire
+#endif /* SOFT_WIRE */
+
+void drv_sht30_init(void)
+{
+#ifdef BOARD_RP2040
+    WIRE_I2C.setSCL(I2C_SCL);
+    WIRE_I2C.setSDA(I2C_SDA);
+#endif
+
+#ifdef BOARD_ESP32_S3
+    // WIRE_I2C.begin(I2C_SCL, I2C_SDA, I2C_FREQ_100KHZ);
+#else
+    WIRE_I2C.begin();
+#endif
+}
+
 bool drv_sht30_data_read(float &ctemp, float &ftemp, float &humidity)
 {
     bool res = false;

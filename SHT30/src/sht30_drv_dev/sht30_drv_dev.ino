@@ -3,12 +3,7 @@
 void setup()
 {
     Serial.begin(115200);
-
-#ifndef SOFT_WIRE
-    WIRE_I2C.setSDA(I2C_SDA);
-    WIRE_I2C.setSCL(I2C_SCL);
-#endif
-    WIRE_I2C.begin();
+    drv_sht30_init();
 }
 
 void loop()
